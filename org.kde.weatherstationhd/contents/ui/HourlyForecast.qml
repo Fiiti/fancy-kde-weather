@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 Item {
@@ -9,39 +8,36 @@ Item {
     property var    hourlyData: []
     property string tempUnit:   "°C"
 
-    implicitHeight: hourlyRow.implicitHeight + Kirigami.Units.smallSpacing
-
-    QQC2.ScrollView {
+    Row {
+        id:           hourlyRow
         anchors.fill: parent
-        QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AsNeeded
-        QQC2.ScrollBar.vertical.policy:   QQC2.ScrollBar.AlwaysOff
-        clip: true
+        spacing:      0
 
-        Row {
-            id:      hourlyRow
-            spacing: Kirigami.Units.smallSpacing
+        Repeater {
+            model: hourlyRoot.hourlyData
 
-            Repeater {
-                model: hourlyRoot.hourlyData
+            // Per-hour cell — width scales with widget width
+            Item {
+                width:  hourlyRoot.width / Math.max(hourlyRoot.hourlyData.length, 1)
+                height: hourlyRow.height
 
-                // Per-hour cell
                 ColumnLayout {
-                    width:   Kirigami.Units.gridUnit * 3.6
-                    spacing: 2
+                    anchors.centerIn: parent
+                    spacing: 0
 
                     // Hour label
                     Text {
-                        text:               _formatHour(modelData.time)
-                        color:              Qt.rgba(1, 1, 1, 0.65)
-                        font.pixelSize:     Kirigami.Units.gridUnit * 0.72
-                        Layout.alignment:   Qt.AlignHCenter
+                        text:             _formatHour(modelData.time)
+                        color:            Qt.rgba(1, 1, 1, 0.65)
+                        font.pixelSize:   Kirigami.Units.gridUnit * 0.72
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
-                    // Weather icon (+50% size)
+                    // Weather icon
                     Image {
                         source:                 root.weatherIconPath(modelData.iconCode)
-                        Layout.preferredWidth:  Kirigami.Units.iconSizes.medium
-                        Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                        Layout.preferredWidth:  Kirigami.Units.iconSizes.large
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.large
                         Layout.alignment:       Qt.AlignHCenter
                         fillMode:               Image.PreserveAspectFit
                         smooth:                 true
@@ -58,13 +54,13 @@ Item {
                         Layout.alignment: Qt.AlignHCenter
                     }
 
-                    // Precipitation chance (only if > 0)
+                    // Precipitation chance (always shown for uniform layout)
                     Text {
-                        visible:          modelData.precipChance !== null
-                                          && modelData.precipChance > 0
-                        text:             (modelData.precipChance || 0) + "%"
+                        text:             (modelData.precipChance !== null && modelData.precipChance !== undefined)
+                                          ? modelData.precipChance + "%" : "0%"
                         color:            "#5BA4E5"
                         font.pixelSize:   Kirigami.Units.gridUnit * 0.72
+                        font.bold:        (modelData.precipChance || 0) >= 10
                         Layout.alignment: Qt.AlignHCenter
                     }
                 }
@@ -72,7 +68,7 @@ Item {
         }
     }
 
-    // VC time format: "HH:MM:SS" (e.g. "10:00:00")
+    // VC time format: "HH:MM:SS" (e.g. "10:00:00") → "HH:MM"
     function _formatHour(isoStr) {
         if (!isoStr || isoStr.length < 5) return "—"
         return isoStr.substring(0, 5)

@@ -130,15 +130,6 @@ Item {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.largeSpacing
 
-                    Text {
-                        text:           root.weatherData ? root.weatherData.current.city : ""
-                        color:          "#BFD8F2"
-                        font.pixelSize: Kirigami.Units.gridUnit * 0.85
-                        font.bold:      true
-                        elide:          Text.ElideRight
-                        Layout.maximumWidth: Kirigami.Units.gridUnit * 10
-                    }
-
                     Item { Layout.fillWidth: true }
 
                     RowLayout {

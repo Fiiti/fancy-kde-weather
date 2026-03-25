@@ -13,63 +13,94 @@ Item {
     RowLayout {
         id: mainLayout
         anchors.fill: parent
-        spacing:      Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.gridUnit
 
-        // ── Left: Icon + Temperature + Condition ─────────────────────────
+        // ── Block 1: Icon + Condition + Stadtname ───────────────────────
         ColumnLayout {
             Layout.alignment:  Qt.AlignTop
-            spacing:           Kirigami.Units.smallSpacing / 2
+            Layout.topMargin:  -Kirigami.Units.smallSpacing
+            Layout.leftMargin: -Kirigami.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
-            Image {
-                source:                 cur ? root.weatherIconPath(cur.iconCode) : ""
+            Item {
                 Layout.preferredWidth:  Kirigami.Units.gridUnit * 7.0
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 7.0
-                fillMode:               Image.PreserveAspectFit
-                smooth:                 true
+                Layout.minimumWidth:    Kirigami.Units.gridUnit * 5.0
+                Layout.minimumHeight:   Kirigami.Units.gridUnit * 5.0
+
+                Image {
+                    anchors.fill: parent
+                    source:       cur ? root.weatherIconPath(cur.iconCode) : ""
+                    fillMode:     Image.PreserveAspectFit
+                    smooth:       true
+                }
+
+                Text {
+                    anchors.bottom:           parent.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text:           cur ? cur.condition : ""
+                    color:          "white"
+                    font.pixelSize: Kirigami.Units.gridUnit * 0.82
+                    font.italic:    true
+                    style:          Text.Outline
+                    styleColor:     "#99000000"
+                    wrapMode:       Text.WordWrap
+                    horizontalAlignment: Text.AlignHCenter
+                    width:          parent.width
+                }
             }
+
+            Text {
+                text:           cur ? (cur.city || "") : ""
+                color:          "#BFD8F2"
+                font.pixelSize: Kirigami.Units.gridUnit * 0.78
+                font.bold:      true
+                Layout.alignment:    Qt.AlignHCenter
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 8
+                wrapMode:       Text.WordWrap
+                horizontalAlignment: Text.AlignHCenter
+            }
+        }
+
+        // ── Block 2: Temperatur + Gefühlt ────────────────────────────────
+        ColumnLayout {
+            Layout.alignment:   Qt.AlignTop
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 4.0
+            spacing: Kirigami.Units.smallSpacing
 
             Text {
                 text: {
                     if (!cur) return "—"
-                    return cur.temperature !== null
-                           ? (cur.temperature + cur.tempUnit)
-                           : "—"
+                        return cur.temperature !== null
+                        ? (cur.temperature + cur.tempUnit)
+                        : "—"
                 }
                 color:          "white"
-                font.pixelSize: Kirigami.Units.gridUnit * 2.0
+                font.pixelSize: Kirigami.Units.gridUnit * 2.8
                 font.bold:      true
             }
 
             Text {
                 visible:        cur && cur.feelsLike !== null
                 text:           cur ? qsTr("Gefühlt %1%2")
-                                      .arg(cur.feelsLike)
-                                      .arg(cur.tempUnit)
-                                    : ""
+                .arg(cur.feelsLike)
+                .arg(cur.tempUnit)
+                : ""
                 color:          Qt.rgba(1, 1, 1, 0.75)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.82
             }
-
-            Text {
-                text:           cur ? cur.condition : ""
-                color:          "#BFD8F2"
-                font.pixelSize: Kirigami.Units.gridUnit * 0.85
-                font.italic:    true
-                wrapMode:       Text.WordWrap
-                Layout.maximumWidth: Kirigami.Units.gridUnit * 8
-            }
         }
 
-        // ── Right: Details grid ──────────────────────────────────────────
+        // ── Block 3: Detail-Grid ─────────────────────────────────────────
         GridLayout {
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-            columns:          2
-            columnSpacing:    Kirigami.Units.largeSpacing
-            rowSpacing:       Kirigami.Units.smallSpacing * 0.8
+            Layout.alignment:    Qt.AlignTop
+            Layout.fillWidth:    true
+            Layout.minimumWidth: Kirigami.Units.gridUnit * 8.0
+            columns:             2
+            columnSpacing:       Kirigami.Units.largeSpacing
+            rowSpacing:          Kirigami.Units.smallSpacing * 0.8
 
-            // Helper components defined inline — label + value pair
-            // Luftfeuchtigkeit
+            // Luftfeuchte
             Text {
                 text:           qsTr("Luftfeuchte")
                 color:          Qt.rgba(1, 1, 1, 0.55)
@@ -77,22 +108,20 @@ Item {
             }
             Text {
                 text:           cur && cur.humidity !== null
-                                ? cur.humidity + " %" : "—"
+                ? cur.humidity + " %" : "—"
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Luftdruck + Trend
+            // Luftdruck
             Text {
                 text:           qsTr("Luftdruck")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
             Text {
-                text: {
-                    if (!cur || cur.pressure === null) return "—"
-                    return cur.pressure + " " + cur.pressUnit
-                }
+                text:           cur && cur.pressure !== null
+                ? cur.pressure + " " + cur.pressUnit : "—"
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -104,17 +133,13 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
             Text {
-                text: {
-                    if (!cur) return "—"
-                    var s = cur.windDir
-                    if (cur.windSpeed !== null) s += "  " + cur.windSpeed + " " + cur.speedUnit
-                    return s || "—"
-                }
+                text:           cur && cur.windSpeed !== null
+                ? cur.windDir + " " + cur.windSpeed + " " + cur.speedUnit : "—"
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Böen (nur wenn vorhanden)
+            // Böen
             Text {
                 visible:        cur && cur.windGust !== null
                 text:           qsTr("Böen")
@@ -124,7 +149,7 @@ Item {
             Text {
                 visible:        cur && cur.windGust !== null
                 text:           cur && cur.windGust !== null
-                                ? cur.windGust + " " + cur.speedUnit : ""
+                ? cur.windGust + " " + cur.speedUnit : ""
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -137,7 +162,7 @@ Item {
             }
             Text {
                 text:           cur && cur.visibility !== null
-                                ? cur.visibility + " " + cur.visUnit : "—"
+                ? cur.visibility + " " + cur.visUnit : "—"
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -151,9 +176,9 @@ Item {
             Text {
                 text: {
                     if (!cur || cur.uvIndex === null) return "—"
-                    var s = String(cur.uvIndex)
-                    if (cur.uvDescription) s += "  (" + cur.uvDescription + ")"
-                    return s
+                        var s = String(cur.uvIndex)
+                        if (cur.uvDescription) s += "  (" + cur.uvDescription + ")"
+                            return s
                 }
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
@@ -167,7 +192,7 @@ Item {
             }
             Text {
                 text:           cur && cur.dewPoint !== null
-                                ? cur.dewPoint + cur.tempUnit : "—"
+                ? cur.dewPoint + cur.tempUnit : "—"
                 color:          "white"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
