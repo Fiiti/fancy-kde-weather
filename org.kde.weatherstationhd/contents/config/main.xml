@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+    <kcfgfile name=""/>
+
+    <group name="General">
+        <!-- Verbindung -->
+        <entry name="apiKey" type="String">
+            <default></default>
+            <label>Weather.com API Key</label>
+        </entry>
+        <entry name="latitude" type="Double">
+            <default>52.2994031</default>
+            <label>Breitengrad</label>
+        </entry>
+        <entry name="longitude" type="Double">
+            <default>13.60879554</default>
+            <label>Längengrad</label>
+        </entry>
+        <entry name="language" type="String">
+            <default>de-DE</default>
+            <label>Sprache (z.B. de-DE, en-US)</label>
+        </entry>
+        <entry name="units" type="String">
+            <default>m</default>
+            <label>Einheiten: m=metrisch, e=imperial, h=hybrid</label>
+        </entry>
+        <entry name="updateInterval" type="Int">
+            <default>600</default>
+            <label>Aktualisierungsintervall in Sekunden</label>
+        </entry>
+
+        <!-- Darstellung: Hintergrund -->
+        <entry name="bgColor" type="String">
+            <default>#0D1220</default>
+            <label>Hintergrundfarbe (Hex #rrggbb)</label>
+        </entry>
+        <entry name="bgAlpha" type="Double">
+            <default>0.92</default>
+            <label>Hintergrund-Deckkraft (0.0=transparent … 1.0=opak)</label>
+        </entry>
+
+    </group>
+
+</kcfg>

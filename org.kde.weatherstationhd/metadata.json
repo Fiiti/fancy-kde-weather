@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "",
+                "Name": "Fiiti"
+            }
+        ],
+        "Category": "Weather",
+        "Description": "Aktuelles Wetter, 12h-Stundenvorhersage und 7-Tage-Prognose via Weather.com API",
+        "Icon": "weather-clear",
+        "Id": "org.kde.weatherstationhd",
+        "License": "MIT",
+        "Name": "Weather Widget KDE",
+        "Version": "1.0.0",
+        "Website": ""
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
