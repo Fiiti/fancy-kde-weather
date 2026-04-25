@@ -32,6 +32,12 @@
             <label>Aktualisierungsintervall in Sekunden</label>
         </entry>
 
+        <!-- Darstellung: Anzeige -->
+        <entry name="showClock" type="Bool">
+            <default>true</default>
+            <label>Uhrzeit anzeigen</label>
+        </entry>
+
         <!-- Darstellung: Hintergrund -->
         <entry name="bgColor" type="String">
             <default>#0D1220</default>

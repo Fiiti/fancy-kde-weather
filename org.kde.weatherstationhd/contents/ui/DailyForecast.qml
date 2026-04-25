@@ -30,7 +30,7 @@ Item {
                     Text {
                         text: index === 0
                               ? qsTr("Heute")
-                              : (day.dayName ? day.dayName.substring(0, 2) : "—")
+                              : (day.dayName || "—")
                         color:            index === 0 ? "#BFD8F2" : Qt.rgba(1, 1, 1, 0.75)
                         font.pixelSize:   Kirigami.Units.gridUnit * 0.72
                         font.bold:        index === 0
@@ -64,7 +64,7 @@ Item {
                     Text {
                         text:             (day.precipChance !== null && day.precipChance !== undefined)
                                           ? day.precipChance + "%" : "0%"
-                        color:            "#5BA4E5"
+                        color:            (day.precipChance || 0) > 0 ? "#5BA4E5" : "#666666"
                         font.pixelSize:   Kirigami.Units.gridUnit * 0.68
                         font.bold:        (day.precipChance || 0) >= 10
                         Layout.alignment: Qt.AlignHCenter

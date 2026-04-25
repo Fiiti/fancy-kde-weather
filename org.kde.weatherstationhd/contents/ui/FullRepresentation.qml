@@ -34,7 +34,7 @@ Item {
     // ── Clock (updates every second) ────────────────────────────────────
     Timer {
         interval: 1000
-        running:  true
+        running:  root.cfgShowClock
         repeat:   true
         triggeredOnStart: true
         onTriggered: clockText.text = Qt.formatDateTime(new Date(), "HH : mm")
@@ -98,9 +98,11 @@ Item {
             Layout.fillHeight: true
             spacing: 0
 
-            // Left: current weather
+            // Left: current weather — fixed width, does not shrink with widget
             CurrentWeather {
-                Layout.preferredWidth: fullRoot.width * 0.30
+                Layout.preferredWidth: Kirigami.Units.gridUnit * 25
+                Layout.minimumWidth:   Kirigami.Units.gridUnit * 25
+                Layout.maximumWidth:   Kirigami.Units.gridUnit * 25
                 Layout.fillHeight:     true
                 Layout.leftMargin:     Kirigami.Units.smallSpacing
                 weatherData:           root.weatherData
@@ -129,6 +131,13 @@ Item {
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: Kirigami.Units.largeSpacing
+
+                    Text {
+                        text:           new Date().toLocaleDateString(Qt.locale(root.cfgLang), "dddd, d MMMM yyyy")
+                        color:          Qt.rgba(1, 1, 1, 0.85)
+                        font.pixelSize: Kirigami.Units.gridUnit * 0.82
+                        font.bold:      true
+                    }
 
                     Item { Layout.fillWidth: true }
 
@@ -164,14 +173,7 @@ Item {
                         }
                     }
 
-                    Text {
-                        text:           Qt.formatDateTime(new Date(), "dddd, d. MMMM yyyy")
-                        color:          Qt.rgba(1, 1, 1, 0.85)
-                        font.pixelSize: Kirigami.Units.gridUnit * 0.82
-                        font.bold:      true
-                    }
-
-                    // Moon phase image + moonrise/moonset times
+                    // Moon phase image + moonrise/moonset with day prefix
                     RowLayout {
                         spacing: Kirigami.Units.smallSpacing
 
@@ -189,16 +191,18 @@ Item {
                         ColumnLayout {
                             spacing: 1
                             Text {
-                                text: root.weatherData
-                                      ? ("↑ " + _formatTime(root.weatherData.astro.moonrise))
-                                      : ""
+                                text:           root.weatherData
+                                                ? ("↑ " + _formatDayTime(root.weatherData.astro.moonriseDate,
+                                                                         root.weatherData.astro.moonrise))
+                                                : ""
                                 color:          Qt.rgba(1, 1, 1, 0.75)
                                 font.pixelSize: Kirigami.Units.gridUnit * 0.65
                             }
                             Text {
-                                text: root.weatherData
-                                      ? ("↓ " + _formatTime(root.weatherData.astro.moonset))
-                                      : ""
+                                text:           root.weatherData
+                                                ? ("↓ " + _formatDayTime(root.weatherData.astro.moonsetDate,
+                                                                         root.weatherData.astro.moonset))
+                                                : ""
                                 color:          Qt.rgba(1, 1, 1, 0.75)
                                 font.pixelSize: Kirigami.Units.gridUnit * 0.65
                             }
@@ -207,6 +211,7 @@ Item {
 
                     Text {
                         id:             clockText
+                        visible:        root.cfgShowClock
                         color:          "white"
                         font.pixelSize: Kirigami.Units.gridUnit * 1.1
                         font.bold:      true
@@ -235,6 +240,7 @@ Item {
             Layout.fillWidth:   true
             Layout.leftMargin:  Kirigami.Units.smallSpacing
             Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.topMargin:   -Kirigami.Units.gridUnit * 0.5
             height: 1
             color:  Qt.rgba(1, 1, 1, 0.15)
         }
@@ -251,9 +257,25 @@ Item {
         }
     }
 
-    // VC time format: "HH:MM:SS" (e.g. "05:58:58") → "HH:MM"
+    // VC time format: "HH:MM:SS" → "HH:MM"
     function _formatTime(isoStr) {
         if (!isoStr || isoStr.length < 5) return ""
         return isoStr.substring(0, 5)
+    }
+
+    // "2026-03-25" + "HH:MM:SS" → "Mo, 08:50"  (or "05., 08:50" as fallback)
+    function _formatDayTime(dateStr, timeStr) {
+        if (!timeStr || timeStr.length < 5) return ""
+        var time = timeStr.substring(0, 5)
+        if (!dateStr) return time
+        var d = new Date(dateStr + "T12:00:00")
+        var dayPart = ""
+        try {
+            dayPart = d.toLocaleDateString(Qt.locale(root.cfgLang), "ddd")
+            dayPart = dayPart.replace(/\.$/, "")  // "Mo." → "Mo"
+        } catch(e) {
+            dayPart = ("0" + d.getDate()).slice(-2) + "."
+        }
+        return dayPart + ", " + time
     }
 }

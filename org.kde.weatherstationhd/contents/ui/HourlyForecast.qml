@@ -58,7 +58,7 @@ Item {
                     Text {
                         text:             (modelData.precipChance !== null && modelData.precipChance !== undefined)
                                           ? modelData.precipChance + "%" : "0%"
-                        color:            "#5BA4E5"
+                        color:            (modelData.precipChance || 0) > 0 ? "#5BA4E5" : "#666666"
                         font.pixelSize:   Kirigami.Units.gridUnit * 0.72
                         font.bold:        (modelData.precipChance || 0) >= 10
                         Layout.alignment: Qt.AlignHCenter

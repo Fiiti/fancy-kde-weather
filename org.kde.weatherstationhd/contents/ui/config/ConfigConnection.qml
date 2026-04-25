@@ -19,14 +19,15 @@ Kirigami.FormLayout {
     property double cfg_longitude: 13.60879554
 
     // Language + units need manual sync (ComboBox index ≠ string value)
-    property string cfg_language: "de-DE"
-    property string cfg_units:    "m"
+    property string cfg_language:  "de-DE"
+    property string cfg_units:     "m"
+    property alias  cfg_showClock: showClockCheck.checked
 
     // ── API Key ───────────────────────────────────────────────────────────
     QQC2.TextField {
         id:                  apiKeyField
         Kirigami.FormData.label: i18n("API-Schlüssel:")
-        placeholderText:     i18n("Weather.com API-Schlüssel eingeben")
+        placeholderText:     i18n("Visual Crossing API-Schlüssel eingeben")
         echoMode:            TextInput.Password
         Layout.fillWidth:    true
     }
@@ -38,7 +39,7 @@ Kirigami.FormLayout {
         text:                connectionPage.cfg_latitude.toFixed(6)
         placeholderText:     "z.B. 52.299403"
         inputMethodHints:    Qt.ImhFormattedNumbersOnly
-        validator:           DoubleValidator { bottom: -90; top: 90; decimals: 6 }
+        validator:           DoubleValidator { bottom: -90; top: 90; decimals: 6; locale: "C" }
         Layout.fillWidth:    true
         onEditingFinished: {
             if (acceptableInput) connectionPage.cfg_latitude = parseFloat(text)
@@ -51,19 +52,33 @@ Kirigami.FormLayout {
         text:                connectionPage.cfg_longitude.toFixed(6)
         placeholderText:     "z.B. 13.608795"
         inputMethodHints:    Qt.ImhFormattedNumbersOnly
-        validator:           DoubleValidator { bottom: -180; top: 180; decimals: 6 }
+        validator:           DoubleValidator { bottom: -180; top: 180; decimals: 6; locale: "C" }
         Layout.fillWidth:    true
         onEditingFinished: {
             if (acceptableInput) connectionPage.cfg_longitude = parseFloat(text)
         }
     }
 
-    // Hint for finding coordinates
-    Text {
+    // Hint for finding coordinates — URL is clickable
+    RowLayout {
         Kirigami.FormData.label: ""
-        text: i18n("Koordinaten ermitteln: mapcoordinates.net")
-        color:          Kirigami.Theme.disabledTextColor
-        font.pixelSize: Kirigami.Units.gridUnit * 0.72
+        spacing: 4
+
+        Text {
+            text:           i18n("Koordinaten ermitteln:")
+            color:          Kirigami.Theme.disabledTextColor
+            font.pixelSize: Kirigami.Units.gridUnit * 0.72
+        }
+        Text {
+            text:           "mapcoordinates.net"
+            color:          Kirigami.Theme.linkColor
+            font.pixelSize: Kirigami.Units.gridUnit * 0.72
+            font.underline: true
+            TapHandler {
+                onTapped:    Qt.openUrlExternally("https://www.mapcoordinates.net")
+                cursorShape: Qt.PointingHandCursor
+            }
+        }
     }
 
     // ── Language ──────────────────────────────────────────────────────────
@@ -96,6 +111,13 @@ Kirigami.FormLayout {
             if (currentIndex < 0) currentIndex = 0
         }
         onActivated: connectionPage.cfg_units = currentValue
+    }
+
+    // ── Display options ───────────────────────────────────────────────────
+    QQC2.CheckBox {
+        id:                  showClockCheck
+        Kirigami.FormData.label: i18n("Anzeige:")
+        text:                i18n("Uhrzeit anzeigen")
     }
 
     // ── Update interval ───────────────────────────────────────────────────

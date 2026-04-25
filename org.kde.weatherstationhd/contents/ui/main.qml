@@ -18,6 +18,7 @@ PlasmoidItem {
     readonly property string cfgLang:        plasmoid.configuration.language
     readonly property string cfgUnits:       plasmoid.configuration.units
     readonly property int    cfgInterval:    plasmoid.configuration.updateInterval
+    readonly property bool   cfgShowClock:   plasmoid.configuration.showClock
 
     // ── Weather data state ───────────────────────────────────────────────
     property var    weatherData:  null
