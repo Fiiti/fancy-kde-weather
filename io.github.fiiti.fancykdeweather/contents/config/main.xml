@@ -48,6 +48,16 @@
             <label>Hintergrund-Deckkraft (0.0=transparent … 1.0=opak)</label>
         </entry>
 
+        <!-- Gespeicherte Widget-Größe (Pixel) — 0 = noch nicht gesetzt -->
+        <entry name="savedWidth" type="Int">
+            <default>0</default>
+            <label>Saved widget width in pixels</label>
+        </entry>
+        <entry name="savedHeight" type="Int">
+            <default>0</default>
+            <label>Saved widget height in pixels</label>
+        </entry>
+
     </group>
 
 </kcfg>

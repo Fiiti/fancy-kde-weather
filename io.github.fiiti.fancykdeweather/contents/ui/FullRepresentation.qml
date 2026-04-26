@@ -8,10 +8,29 @@ Item {
     id: fullRoot
 
     // Wide horizontal banner, like the original Rainmeter widget
-    Layout.preferredWidth:  Kirigami.Units.gridUnit * 58
-    Layout.preferredHeight: Kirigami.Units.gridUnit * 20
+    Layout.preferredWidth:  Plasmoid.configuration.savedWidth  > 0
+                            ? Plasmoid.configuration.savedWidth
+                            : Kirigami.Units.gridUnit * 58
+    Layout.preferredHeight: Plasmoid.configuration.savedHeight > 0
+                            ? Plasmoid.configuration.savedHeight
+                            : Kirigami.Units.gridUnit * 20
     Layout.minimumWidth:    Kirigami.Units.gridUnit * 40
     Layout.minimumHeight:   Kirigami.Units.gridUnit * 16
+
+    // Persist user-chosen size so it survives reboots (gridUnit can vary slightly between sessions)
+    Timer {
+        id: saveSizeTimer
+        interval: 500
+        repeat:   false
+        onTriggered: {
+            if (fullRoot.width > 100 && fullRoot.height > 100) {
+                Plasmoid.configuration.savedWidth  = Math.round(fullRoot.width)
+                Plasmoid.configuration.savedHeight = Math.round(fullRoot.height)
+            }
+        }
+    }
+    onWidthChanged:  saveSizeTimer.restart()
+    onHeightChanged: saveSizeTimer.restart()
 
     // ── Background ──────────────────────────────────────────────────────
     Rectangle {
