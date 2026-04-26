@@ -2,7 +2,7 @@
 
 A KDE Plasma 6 widget displaying current weather conditions, a 12-hour hourly forecast, and a 7-day daily forecast — powered by the [Visual Crossing](https://www.visualcrossing.com) weather API.
 
-![Fancy KDE Weather Widget](screenshot.png)
+<img src="assets/fkw_logo.png" width="800" alt="Fancy KDE Weather Logo">
 
 ## Features
 
@@ -15,6 +15,36 @@ A KDE Plasma 6 widget displaying current weather conditions, a 12-hour hourly fo
 - **UI language** follows your KDE system locale (English default, German included)
 - **Customizable background** color and opacity
 - **Compact panel mode** with icon + temperature
+
+## Screenshots
+
+**Darkgreen Background (Solid)**
+
+<img src="assets/fkw_sample1.png" width="600" alt="Darkgreen Background (Solid)">
+
+</br>
+
+**Darkred Background (Solid)**
+
+<img src="assets/fkw_sample2.png" width="600" alt="Darkred Background (Solid)">
+
+</br>
+
+**Darkred Background (40% Transparent)**
+
+<img src="assets/fkw_sample3.png" width="600" alt="Darkred Background (40% Transparent)">
+
+</br>
+
+**Grey Background (3% Transparent)**
+
+<img src="assets/fkw_sample4.png" width="600" alt="Grey Background (3% Transparent)">
+
+</br>
+
+**Darkgrey Background (70% Transparent)**
+
+<img src="assets/fkw_sample5.png" width="600" alt="Darkgrey Background (70% Transparent)">
 
 ## Requirements
 
@@ -58,7 +88,7 @@ Right-click the widget → **Configure Widget…**
 | Latitude / Longitude | Location coordinates ([mapcoordinates.net](https://www.mapcoordinates.net)) |
 | Language | Language for weather descriptions (independent of UI language) |
 | Units | Metric / Imperial / Hybrid |
-| Update interval | Data refresh interval in seconds (default: 600) |
+| Update interval | Data refresh interval in minutes (default: 10, max: 1440) |
 | Show clock | Toggle the live clock in the info bar |
 | Background color / Opacity | Widget appearance |
 
