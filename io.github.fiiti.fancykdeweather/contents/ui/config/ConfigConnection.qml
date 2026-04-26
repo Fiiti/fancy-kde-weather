@@ -11,8 +11,10 @@ Kirigami.FormLayout {
     id: connectionPage
 
     // ── Automatic bindings via cfg_ prefix ───────────────────────────────
-    property alias cfg_apiKey:         apiKeyField.text
-    property alias cfg_updateInterval: intervalSpinBox.value
+    property alias cfg_apiKey: apiKeyField.text
+
+    // updateInterval stored in seconds, SpinBox displays minutes
+    property int cfg_updateInterval: 600
 
     // Lat/Lon as strings (DoubleValidator ensures numeric input)
     property double cfg_latitude:  52.2994031
@@ -30,6 +32,27 @@ Kirigami.FormLayout {
         placeholderText:     i18n("Enter Visual Crossing API key")
         echoMode:            TextInput.Password
         Layout.fillWidth:    true
+    }
+
+    RowLayout {
+        Kirigami.FormData.label: ""
+        spacing: 4
+
+        Text {
+            text:           i18n("Free key at")
+            color:          Kirigami.Theme.disabledTextColor
+            font.pixelSize: Kirigami.Units.gridUnit * 0.72
+        }
+        Text {
+            text:           "visualcrossing.com/weather-api"
+            color:          Kirigami.Theme.linkColor
+            font.pixelSize: Kirigami.Units.gridUnit * 0.72
+            font.underline: true
+            TapHandler {
+                onTapped:    Qt.openUrlExternally("https://www.visualcrossing.com/weather-api")
+                cursorShape: Qt.PointingHandCursor
+            }
+        }
     }
 
     // ── Coordinates ───────────────────────────────────────────────────────
@@ -123,10 +146,12 @@ Kirigami.FormLayout {
     // ── Update interval ───────────────────────────────────────────────────
     QQC2.SpinBox {
         id:                  intervalSpinBox
-        Kirigami.FormData.label: i18n("Update interval (seconds):")
-        from:                60
-        to:                  3600
-        stepSize:            60
+        Kirigami.FormData.label: i18n("Update interval (minutes):")
+        from:                1
+        to:                  60
+        stepSize:            1
+        value:               Math.round(connectionPage.cfg_updateInterval / 60)
         editable:            true
+        onValueModified:     connectionPage.cfg_updateInterval = value * 60
     }
 }

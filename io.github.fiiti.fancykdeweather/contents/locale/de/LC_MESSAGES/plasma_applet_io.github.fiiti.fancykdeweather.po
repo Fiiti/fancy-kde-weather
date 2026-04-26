@@ -87,8 +87,11 @@ msgstr "Anzeige:"
 msgid "Show clock"
 msgstr "Uhrzeit anzeigen"
 
-msgid "Update interval (seconds):"
-msgstr "Aktualisierung (Sekunden):"
+msgid "Update interval (minutes):"
+msgstr "Aktualisierung (Minuten):"
+
+msgid "Free key at"
+msgstr "Kostenlosen Key erhalten bei"
 
 # ConfigAppearance.qml
 msgid "Preview:"

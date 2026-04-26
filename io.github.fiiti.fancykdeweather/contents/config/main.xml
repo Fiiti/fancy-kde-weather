@@ -12,12 +12,12 @@
             <label>Weather.com API Key</label>
         </entry>
         <entry name="latitude" type="Double">
-            <default>52.2994031</default>
-            <label>Breitengrad</label>
+            <default>71.169951</default>
+            <label>Latitude</label>
         </entry>
         <entry name="longitude" type="Double">
-            <default>13.60879554</default>
-            <label>Längengrad</label>
+            <default>25.785889</default>
+            <label>Longitude</label>
         </entry>
         <entry name="language" type="String">
             <default>de-DE</default>
@@ -29,7 +29,7 @@
         </entry>
         <entry name="updateInterval" type="Int">
             <default>600</default>
-            <label>Aktualisierungsintervall in Sekunden</label>
+            <label>Update interval in seconds (UI shows minutes)</label>
         </entry>
 
         <!-- Darstellung: Anzeige -->
