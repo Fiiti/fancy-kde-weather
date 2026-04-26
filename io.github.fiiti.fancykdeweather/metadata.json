@@ -3,10 +3,10 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "",
                 "Name": "Fiiti"
             }
         ],
+        "BugReportUrl": "https://github.com/Fiiti/fancy-kde-weather/issues",
         "Category": "Weather",
         "Description": "Current weather, 12-hour hourly forecast and 7-day daily forecast via Visual Crossing API",
         "Icon": "weather-clear",
