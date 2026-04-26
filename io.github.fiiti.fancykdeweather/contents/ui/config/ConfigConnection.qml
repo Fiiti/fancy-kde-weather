@@ -148,10 +148,11 @@ Kirigami.FormLayout {
         id:                  intervalSpinBox
         Kirigami.FormData.label: i18n("Update interval (minutes):")
         from:                1
-        to:                  60
+        to:                  1440
         stepSize:            1
         value:               Math.round(connectionPage.cfg_updateInterval / 60)
         editable:            true
+        implicitWidth:       Kirigami.Units.gridUnit * 7
         onValueModified:     connectionPage.cfg_updateInterval = value * 60
     }
 }
