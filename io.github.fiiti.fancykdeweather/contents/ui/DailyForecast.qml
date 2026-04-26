@@ -29,7 +29,7 @@ Item {
                     // Day label
                     Text {
                         text: index === 0
-                              ? qsTr("Heute")
+                              ? i18n("Today")
                               : (day.dayName || "—")
                         color:            index === 0 ? "#BFD8F2" : Qt.rgba(1, 1, 1, 0.75)
                         font.pixelSize:   Kirigami.Units.gridUnit * 0.72

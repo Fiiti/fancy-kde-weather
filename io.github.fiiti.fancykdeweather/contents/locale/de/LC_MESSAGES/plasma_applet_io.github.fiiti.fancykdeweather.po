@@ -1,0 +1,104 @@
+# German translation for Fancy KDE Weather
+# Copyright (C) 2026 Fiiti
+# SPDX-License-Identifier: MIT
+msgid ""
+msgstr ""
+"Project-Id-Version: Fancy KDE Weather 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Fiiti/fancy-kde-weather/issues\n"
+"PO-Revision-Date: 2026-04-26 12:51+0000\n"
+"Last-Translator: Fiiti <>\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# CurrentWeather.qml
+msgid "Feels like %1%2"
+msgstr "Gefühlt %1%2"
+
+msgid "Humidity"
+msgstr "Luftfeuchte"
+
+msgid "Pressure"
+msgstr "Luftdruck"
+
+msgid "Wind"
+msgstr "Wind"
+
+msgid "Gusts"
+msgstr "Böen"
+
+msgid "Visibility"
+msgstr "Sichtweite"
+
+msgid "UV Index"
+msgstr "UV-Index"
+
+msgid "Dew point"
+msgstr "Taupunkt"
+
+# DailyForecast.qml
+msgid "Today"
+msgstr "Heute"
+
+# main.qml / FullRepresentation.qml
+msgid "Please enter your API key in the settings."
+msgstr "Bitte API-Schlüssel in den Einstellungen eintragen."
+
+msgid "Loading weather data…"
+msgstr "Wetterdaten werden geladen…"
+
+# ConfigConnection.qml
+msgid "API Key:"
+msgstr "API-Schlüssel:"
+
+msgid "Enter Visual Crossing API key"
+msgstr "Visual Crossing API-Schlüssel eingeben"
+
+msgid "Latitude:"
+msgstr "Breitengrad:"
+
+msgid "Longitude:"
+msgstr "Längengrad:"
+
+msgid "Find coordinates:"
+msgstr "Koordinaten ermitteln:"
+
+msgid "Language:"
+msgstr "Sprache:"
+
+msgid "Units:"
+msgstr "Einheiten:"
+
+msgid "Metric (°C, km/h, hPa, km)"
+msgstr "Metrisch (°C, km/h, hPa, km)"
+
+msgid "Imperial (°F, mph, inHg, mi)"
+msgstr "Imperial (°F, mph, inHg, mi)"
+
+msgid "Hybrid (°C, mph, hPa, km)"
+msgstr "Hybrid (°C, mph, hPa, km)"
+
+msgid "Display:"
+msgstr "Anzeige:"
+
+msgid "Show clock"
+msgstr "Uhrzeit anzeigen"
+
+msgid "Update interval (seconds):"
+msgstr "Aktualisierung (Sekunden):"
+
+# ConfigAppearance.qml
+msgid "Preview:"
+msgstr "Vorschau:"
+
+msgid "Background"
+msgstr "Hintergrund"
+
+msgid "Color:"
+msgstr "Farbe:"
+
+msgid "Opacity:"
+msgstr "Deckkraft:"

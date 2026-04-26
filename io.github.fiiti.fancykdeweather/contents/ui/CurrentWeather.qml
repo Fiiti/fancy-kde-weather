@@ -82,9 +82,7 @@ Item {
 
             Text {
                 visible:        cur && cur.feelsLike !== null
-                text:           cur ? qsTr("Gefühlt %1%2")
-                .arg(cur.feelsLike)
-                .arg(cur.tempUnit)
+                text:           cur ? i18n("Feels like %1%2", cur.feelsLike, cur.tempUnit)
                 : ""
                 color:          Qt.rgba(1, 1, 1, 0.75)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.82
@@ -100,9 +98,9 @@ Item {
             columnSpacing:       Kirigami.Units.largeSpacing
             rowSpacing:          Kirigami.Units.smallSpacing * 0.8
 
-            // Luftfeuchte
+            // Humidity
             Text {
-                text:           qsTr("Luftfeuchte")
+                text:           i18n("Humidity")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -113,9 +111,9 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Luftdruck
+            // Pressure
             Text {
-                text:           qsTr("Luftdruck")
+                text:           i18n("Pressure")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -128,7 +126,7 @@ Item {
 
             // Wind
             Text {
-                text:           qsTr("Wind")
+                text:           i18n("Wind")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -139,10 +137,10 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Böen
+            // Gusts
             Text {
                 visible:        cur && cur.windGust !== null
-                text:           qsTr("Böen")
+                text:           i18n("Gusts")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -154,9 +152,9 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Sichtweite
+            // Visibility
             Text {
-                text:           qsTr("Sichtweite")
+                text:           i18n("Visibility")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -167,9 +165,9 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // UV-Index
+            // UV Index
             Text {
-                text:           qsTr("UV-Index")
+                text:           i18n("UV Index")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
@@ -184,9 +182,9 @@ Item {
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }
 
-            // Taupunkt
+            // Dew point
             Text {
-                text:           qsTr("Taupunkt")
+                text:           i18n("Dew point")
                 color:          Qt.rgba(1, 1, 1, 0.55)
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
             }

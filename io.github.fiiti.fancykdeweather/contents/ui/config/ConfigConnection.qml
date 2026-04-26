@@ -26,8 +26,8 @@ Kirigami.FormLayout {
     // ── API Key ───────────────────────────────────────────────────────────
     QQC2.TextField {
         id:                  apiKeyField
-        Kirigami.FormData.label: i18n("API-Schlüssel:")
-        placeholderText:     i18n("Visual Crossing API-Schlüssel eingeben")
+        Kirigami.FormData.label: i18n("API Key:")
+        placeholderText:     i18n("Enter Visual Crossing API key")
         echoMode:            TextInput.Password
         Layout.fillWidth:    true
     }
@@ -35,9 +35,9 @@ Kirigami.FormLayout {
     // ── Coordinates ───────────────────────────────────────────────────────
     QQC2.TextField {
         id:                  latField
-        Kirigami.FormData.label: i18n("Breitengrad:")
+        Kirigami.FormData.label: i18n("Latitude:")
         text:                connectionPage.cfg_latitude.toFixed(6)
-        placeholderText:     "z.B. 52.299403"
+        placeholderText:     "e.g. 52.299403"
         inputMethodHints:    Qt.ImhFormattedNumbersOnly
         validator:           DoubleValidator { bottom: -90; top: 90; decimals: 6; locale: "C" }
         Layout.fillWidth:    true
@@ -48,9 +48,9 @@ Kirigami.FormLayout {
 
     QQC2.TextField {
         id:                  lonField
-        Kirigami.FormData.label: i18n("Längengrad:")
+        Kirigami.FormData.label: i18n("Longitude:")
         text:                connectionPage.cfg_longitude.toFixed(6)
-        placeholderText:     "z.B. 13.608795"
+        placeholderText:     "e.g. 13.608795"
         inputMethodHints:    Qt.ImhFormattedNumbersOnly
         validator:           DoubleValidator { bottom: -180; top: 180; decimals: 6; locale: "C" }
         Layout.fillWidth:    true
@@ -65,7 +65,7 @@ Kirigami.FormLayout {
         spacing: 4
 
         Text {
-            text:           i18n("Koordinaten ermitteln:")
+            text:           i18n("Find coordinates:")
             color:          Kirigami.Theme.disabledTextColor
             font.pixelSize: Kirigami.Units.gridUnit * 0.72
         }
@@ -84,7 +84,7 @@ Kirigami.FormLayout {
     // ── Language ──────────────────────────────────────────────────────────
     QQC2.ComboBox {
         id:                  languageCombo
-        Kirigami.FormData.label: i18n("Sprache:")
+        Kirigami.FormData.label: i18n("Language:")
         model:               ["de-DE", "en-US", "fr-FR", "es-ES", "it-IT",
                               "nl-NL", "pl-PL", "pt-BR", "ru-RU", "zh-CN"]
         currentIndex:        model.indexOf(connectionPage.cfg_language)
@@ -98,13 +98,13 @@ Kirigami.FormLayout {
     // ── Units ─────────────────────────────────────────────────────────────
     QQC2.ComboBox {
         id:                  unitsCombo
-        Kirigami.FormData.label: i18n("Einheiten:")
+        Kirigami.FormData.label: i18n("Units:")
         textRole:            "text"
         valueRole:           "value"
         model: [
-            { text: i18n("Metrisch  (°C, km/h, hPa, km)"), value: "m" },
-            { text: i18n("Imperial  (°F, mph, inHg, mi)"),  value: "e" },
-            { text: i18n("Hybrid    (°C, mph, hPa, km)"),   value: "h" }
+            { text: i18n("Metric (°C, km/h, hPa, km)"),   value: "m" },
+            { text: i18n("Imperial (°F, mph, inHg, mi)"),  value: "e" },
+            { text: i18n("Hybrid (°C, mph, hPa, km)"),     value: "h" }
         ]
         Component.onCompleted: {
             currentIndex = indexOfValue(connectionPage.cfg_units)
@@ -116,14 +116,14 @@ Kirigami.FormLayout {
     // ── Display options ───────────────────────────────────────────────────
     QQC2.CheckBox {
         id:                  showClockCheck
-        Kirigami.FormData.label: i18n("Anzeige:")
-        text:                i18n("Uhrzeit anzeigen")
+        Kirigami.FormData.label: i18n("Display:")
+        text:                i18n("Show clock")
     }
 
     // ── Update interval ───────────────────────────────────────────────────
     QQC2.SpinBox {
         id:                  intervalSpinBox
-        Kirigami.FormData.label: i18n("Aktualisierung (Sekunden):")
+        Kirigami.FormData.label: i18n("Update interval (seconds):")
         from:                60
         to:                  3600
         stepSize:            60

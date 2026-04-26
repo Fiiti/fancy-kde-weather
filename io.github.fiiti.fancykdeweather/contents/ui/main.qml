@@ -59,7 +59,7 @@ PlasmoidItem {
     // ── API fetch ────────────────────────────────────────────────────────
     function refresh() {
         if (cfgApiKey.length === 0) {
-            errorMessage = qsTr("Bitte API-Schlüssel in den Einstellungen eintragen.")
+            errorMessage = i18n("Please enter your API key in the settings.")
             return
         }
         loading = true
@@ -97,7 +97,7 @@ PlasmoidItem {
     // ── Panel tooltip ────────────────────────────────────────────────────
     // In Plasma 6: toolTipMainText/SubText are direct PlasmoidItem properties
     toolTipMainText: {
-        if (!weatherData) return "Weather Widget KDE"
+        if (!weatherData) return "Fancy KDE Weather"
         var c = weatherData.current
         return (c.city ? c.city + " — " : "") +
                (c.temperature !== null ? c.temperature + c.tempUnit : "—")
@@ -105,7 +105,7 @@ PlasmoidItem {
     toolTipSubText: {
         if (weatherData) return weatherData.current.condition
         if (errorMessage) return errorMessage
-        return qsTr("Lade Wetterdaten…")
+        return i18n("Loading weather data…")
     }
     Plasmoid.icon: {
         if (weatherData) {

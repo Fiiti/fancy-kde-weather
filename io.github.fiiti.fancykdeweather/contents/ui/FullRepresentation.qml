@@ -73,7 +73,7 @@ Item {
                         Layout.alignment:    Qt.AlignHCenter
                         Layout.maximumWidth: fullRoot.width * 0.8
                         text:      root.loading
-                                   ? qsTr("Wetterdaten werden geladen…")
+                                   ? i18n("Loading weather data…")
                                    : root.errorMessage
                         color:     root.loading ? "white" : "#FF6B6B"
                         wrapMode:  Text.WordWrap

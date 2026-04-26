@@ -12,7 +12,7 @@ Kirigami.FormLayout {
 
     // ── Vorschau ──────────────────────────────────────────────────────────
     Rectangle {
-        Kirigami.FormData.label: i18n("Vorschau:")
+        Kirigami.FormData.label: i18n("Preview:")
         width:  Kirigami.Units.gridUnit * 12
         height: Kirigami.Units.gridUnit * 3
         radius: Kirigami.Units.cornerRadius
@@ -20,7 +20,7 @@ Kirigami.FormLayout {
 
         Text {
             anchors.centerIn: parent
-            text:  "Weather Widget KDE"
+            text:  "Fancy KDE Weather"
             color: "white"
             font.pixelSize: Kirigami.Units.gridUnit * 0.8
         }
@@ -29,11 +29,11 @@ Kirigami.FormLayout {
     // ── Hintergrund ───────────────────────────────────────────────────────
     Kirigami.Separator {
         Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18n("Hintergrund")
+        Kirigami.FormData.label: i18n("Background")
     }
 
     RowLayout {
-        Kirigami.FormData.label: i18n("Farbe:")
+        Kirigami.FormData.label: i18n("Color:")
         spacing: Kirigami.Units.smallSpacing
 
         KQuickControls.ColorButton {
@@ -57,7 +57,7 @@ Kirigami.FormLayout {
     }
 
     RowLayout {
-        Kirigami.FormData.label: i18n("Deckkraft:")
+        Kirigami.FormData.label: i18n("Opacity:")
         spacing: Kirigami.Units.smallSpacing
 
         QQC2.Slider {
