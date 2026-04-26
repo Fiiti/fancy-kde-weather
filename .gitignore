@@ -11,5 +11,10 @@
 .DS_Store
 Thumbs.db
 
-# Claude Code local settings (contains permission rules, not project config)
-.claude/settings.local.json
+# Claude Code (project-local AI assistant config — not relevant for contributors)
+.claude/
+CLAUDE.md
+Plan_temp.md
+
+# Development scratch notes
+dev/
