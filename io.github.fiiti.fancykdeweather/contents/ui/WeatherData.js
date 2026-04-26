@@ -278,7 +278,7 @@ function fetchWeather(cfg, callback) {
         cxhr.open("GET",
             "https://nominatim.openstreetmap.org/reverse"
             + "?lat=" + cfg.latitude + "&lon=" + cfg.longitude + "&format=json");
-        cxhr.setRequestHeader("User-Agent", "WeatherStationHD-KDE-Plasmoid/1.0");
+        cxhr.setRequestHeader("User-Agent", "FancyKDEWeather/1.0 (github.com/Fiiti/fancy-kde-weather)");
         cxhr.send();
     }
 }

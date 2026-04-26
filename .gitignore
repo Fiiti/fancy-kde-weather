@@ -1,0 +1,15 @@
+# Build artifacts
+*.zip
+*.tar.gz
+
+# Editor
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings (contains permission rules, not project config)
+.claude/settings.local.json
