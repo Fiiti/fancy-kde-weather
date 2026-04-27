@@ -10,6 +10,7 @@ A KDE Plasma 6 widget displaying current weather conditions, a 12-hour hourly fo
 - **12-hour hourly forecast:** icon, temperature, precipitation chance
 - **7-day daily forecast:** icon, high/low temperature, precipitation chance
 - **Astro info:** sunrise, sunset, moon phase, moonrise/moonset with day prefix
+- **Automatic city name** from your coordinates via reverse geocoding (OpenStreetMap/Nominatim) — no manual entry needed
 - **Live clock** (optional, toggleable)
 - **Localized weather descriptions** in 10 languages (de, en, fr, es, it, nl, pl, pt, ru, zh)
 - **UI language** follows your KDE system locale (English default, German included)
