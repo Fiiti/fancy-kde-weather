@@ -1,4 +1,4 @@
-# German translation for Fancy KDE Weather
+# Dutch translation for Fancy KDE Weather
 # Copyright (C) 2026 Fiiti
 # SPDX-License-Identifier: MIT
 msgid ""
@@ -7,108 +7,108 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/Fiiti/fancy-kde-weather/issues\n"
 "PO-Revision-Date: 2026-04-26 12:51+0000\n"
 "Last-Translator: Fiiti\n"
-"Language-Team: German\n"
-"Language: de\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# config/config.qml
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Appearance"
+msgstr "Weergave"
+
 # CurrentWeather.qml
 msgid "Feels like %1%2"
-msgstr "Gefühlt %1%2"
+msgstr "Voelt als %1%2"
 
 msgid "Humidity"
-msgstr "Luftfeuchte"
+msgstr "Luchtvochtigheid"
 
 msgid "Pressure"
-msgstr "Luftdruck"
+msgstr "Luchtdruk"
 
 msgid "Wind"
 msgstr "Wind"
 
 msgid "Gusts"
-msgstr "Böen"
+msgstr "Windstoten"
 
 msgid "Visibility"
-msgstr "Sichtweite"
+msgstr "Zicht"
 
 msgid "UV Index"
-msgstr "UV-Index"
+msgstr "UV-index"
 
 msgid "Dew point"
-msgstr "Taupunkt"
+msgstr "Dauwpunt"
 
 # DailyForecast.qml
 msgid "Today"
-msgstr "Heute"
+msgstr "Vandaag"
 
 # main.qml / FullRepresentation.qml
 msgid "Please enter your API key in the settings."
-msgstr "Bitte API-Schlüssel in den Einstellungen eintragen."
+msgstr "Voer je API-sleutel in bij de instellingen."
 
 msgid "Loading weather data…"
-msgstr "Wetterdaten werden geladen…"
+msgstr "Weergegevens laden…"
 
 # ConfigConnection.qml
 msgid "API Key:"
-msgstr "API-Schlüssel:"
+msgstr "API-sleutel:"
 
 msgid "Enter Visual Crossing API key"
-msgstr "Visual Crossing API-Schlüssel eingeben"
+msgstr "Voer Visual Crossing API-sleutel in"
 
 msgid "Latitude:"
-msgstr "Breitengrad:"
+msgstr "Breedtegraad:"
 
 msgid "Longitude:"
-msgstr "Längengrad:"
+msgstr "Lengtegraad:"
 
 msgid "Find coordinates:"
-msgstr "Koordinaten ermitteln:"
+msgstr "Coördinaten zoeken:"
 
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "Taal:"
 
 msgid "Units:"
-msgstr "Einheiten:"
+msgstr "Eenheden:"
 
 msgid "Metric (°C, km/h, hPa, km)"
 msgstr "Metrisch (°C, km/h, hPa, km)"
 
 msgid "Imperial (°F, mph, inHg, mi)"
-msgstr "Imperial (°F, mph, inHg, mi)"
+msgstr "Imperiaal (°F, mph, inHg, mi)"
 
 msgid "Hybrid (°C, mph, hPa, km)"
-msgstr "Hybrid (°C, mph, hPa, km)"
+msgstr "Hybride (°C, mph, hPa, km)"
 
 msgid "Display:"
-msgstr "Anzeige:"
+msgstr "Weergave:"
 
 msgid "Show clock"
-msgstr "Uhrzeit anzeigen"
+msgstr "Klok weergeven"
 
 msgid "Update interval (minutes):"
-msgstr "Aktualisierung (Minuten):"
+msgstr "Verversingsinterval (minuten):"
 
 msgid "Free key at"
-msgstr "Kostenlosen Key erhalten bei"
-
-# config/config.qml
-msgid "General"
-msgstr "Allgemein"
-
-msgid "Appearance"
-msgstr "Darstellung"
+msgstr "Gratis sleutel bij"
 
 # ConfigAppearance.qml
 msgid "Preview:"
-msgstr "Vorschau:"
+msgstr "Voorbeeld:"
 
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Achtergrond"
 
 msgid "Color:"
-msgstr "Farbe:"
+msgstr "Kleur:"
 
 msgid "Opacity:"
-msgstr "Deckkraft:"
+msgstr "Doorzichtigheid:"

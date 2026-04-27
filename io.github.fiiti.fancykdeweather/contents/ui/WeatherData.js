@@ -10,6 +10,7 @@
 var _pendingRequest     = null;
 var _pendingCityRequest = null;
 var _cityCache          = { key: "", name: "" };
+var _requestId          = 0;
 
 // ── Icon mapping: VC string → numeric PNG filename ────────────────────────────
 
@@ -207,6 +208,7 @@ function fetchWeather(cfg, callback) {
     if (_pendingRequest)     { _pendingRequest.abort();     _pendingRequest     = null; }
     if (_pendingCityRequest) { _pendingCityRequest.abort(); _pendingCityRequest = null; }
 
+    var thisId = ++_requestId;
     var state = { weatherData: null, weatherErr: null, city: null,
                   weatherDone: false, cityDone: false, cancelled: false };
 
@@ -225,7 +227,15 @@ function fetchWeather(cfg, callback) {
         if (wxhr.readyState !== XMLHttpRequest.DONE) return;
         _pendingRequest = null;
 
-        if (wxhr.status === 0) { state.cancelled = true; return; }
+        // Superseded by a newer fetchWeather call (intentional abort) → ignore silently
+        if (thisId !== _requestId) { state.cancelled = true; return; }
+
+        if (wxhr.status === 0) {
+            state.weatherErr  = "Netzwerkfehler – API nicht erreichbar";
+            state.weatherDone = true;
+            _tryFinish();
+            return;
+        }
 
         if (wxhr.status !== 200) {
             state.weatherErr  = "HTTP-Fehler " + wxhr.status + ": " + wxhr.statusText;
@@ -303,14 +313,23 @@ function _degreesToCardinal(deg) {
     return dirs[Math.round(deg / 22.5) % 16];
 }
 
-// UV index → German description
-function _uvDescription(idx) {
+// UV index level → localized description (WHO scale)
+var _uvLevels = [
+    { max:  2, "de-DE": "Niedrig",       "en-US": "Low",       "fr-FR": "Faible",       "es-ES": "Bajo",        "it-IT": "Basso",         "nl-NL": "Laag",         "pl-PL": "Niski",           "pt-BR": "Baixo",      "ru-RU": "Низкий",           "zh-CN": "低"   },
+    { max:  5, "de-DE": "Mittel",        "en-US": "Moderate",  "fr-FR": "Modéré",       "es-ES": "Moderado",    "it-IT": "Moderato",      "nl-NL": "Matig",        "pl-PL": "Umiarkowany",     "pt-BR": "Moderado",   "ru-RU": "Умеренный",        "zh-CN": "中等" },
+    { max:  7, "de-DE": "Hoch",          "en-US": "High",      "fr-FR": "Élevé",        "es-ES": "Alto",        "it-IT": "Alto",          "nl-NL": "Hoog",         "pl-PL": "Wysoki",          "pt-BR": "Alto",       "ru-RU": "Высокий",          "zh-CN": "高"   },
+    { max: 10, "de-DE": "Sehr hoch",     "en-US": "Very high", "fr-FR": "Très élevé",   "es-ES": "Muy alto",    "it-IT": "Molto alto",    "nl-NL": "Zeer hoog",    "pl-PL": "Bardzo wysoki",   "pt-BR": "Muito alto", "ru-RU": "Очень высокий",    "zh-CN": "极高" },
+    { max: 99, "de-DE": "Extrem",        "en-US": "Extreme",   "fr-FR": "Extrême",      "es-ES": "Extremo",     "it-IT": "Estremo",       "nl-NL": "Extreem",      "pl-PL": "Ekstremalny",     "pt-BR": "Extremo",    "ru-RU": "Экстремальный",    "zh-CN": "极端" }
+];
+
+function _uvDescription(idx, language) {
     if (idx === null || idx === undefined) return "";
-    if (idx <= 2)  return "Niedrig";
-    if (idx <= 5)  return "Mittel";
-    if (idx <= 7)  return "Hoch";
-    if (idx <= 10) return "Sehr hoch";
-    return "Extrem";
+    var lang = language || "en-US";
+    for (var i = 0; i < _uvLevels.length; i++) {
+        if (idx <= _uvLevels[i].max)
+            return _uvLevels[i][lang] || _uvLevels[i]["en-US"];
+    }
+    return "";
 }
 
 // Moon phase float (0.0–1.0) → phase code for moon PNG icons
@@ -393,7 +412,7 @@ function _parseResponse(raw, units, language) {
                        ? Math.round(cur.windgust) : null,
         visibility:    cur.visibility !== undefined ? cur.visibility           : null,
         uvIndex:       cur.uvindex   !== undefined ? cur.uvindex               : null,
-        uvDescription: _uvDescription(cur.uvindex),
+        uvDescription: _uvDescription(cur.uvindex, lang),
         dewPoint:      cur.dew       !== undefined ? Math.round(cur.dew)       : null,
         tempUnit:      tempUnit,
         speedUnit:     speedUnit,

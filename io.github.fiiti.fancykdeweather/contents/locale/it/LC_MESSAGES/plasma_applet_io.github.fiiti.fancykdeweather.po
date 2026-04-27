@@ -1,4 +1,4 @@
-# German translation for Fancy KDE Weather
+# Italian translation for Fancy KDE Weather
 # Copyright (C) 2026 Fiiti
 # SPDX-License-Identifier: MIT
 msgid ""
@@ -7,108 +7,108 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://github.com/Fiiti/fancy-kde-weather/issues\n"
 "PO-Revision-Date: 2026-04-26 12:51+0000\n"
 "Last-Translator: Fiiti\n"
-"Language-Team: German\n"
-"Language: de\n"
+"Language-Team: Italian\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+# config/config.qml
+msgid "General"
+msgstr "Generale"
+
+msgid "Appearance"
+msgstr "Aspetto"
+
 # CurrentWeather.qml
 msgid "Feels like %1%2"
-msgstr "Gefühlt %1%2"
+msgstr "Percepita %1%2"
 
 msgid "Humidity"
-msgstr "Luftfeuchte"
+msgstr "Umidità"
 
 msgid "Pressure"
-msgstr "Luftdruck"
+msgstr "Pressione"
 
 msgid "Wind"
-msgstr "Wind"
+msgstr "Vento"
 
 msgid "Gusts"
-msgstr "Böen"
+msgstr "Raffiche"
 
 msgid "Visibility"
-msgstr "Sichtweite"
+msgstr "Visibilità"
 
 msgid "UV Index"
-msgstr "UV-Index"
+msgstr "Indice UV"
 
 msgid "Dew point"
-msgstr "Taupunkt"
+msgstr "Punto di rugiada"
 
 # DailyForecast.qml
 msgid "Today"
-msgstr "Heute"
+msgstr "Oggi"
 
 # main.qml / FullRepresentation.qml
 msgid "Please enter your API key in the settings."
-msgstr "Bitte API-Schlüssel in den Einstellungen eintragen."
+msgstr "Inserisci la tua chiave API nelle impostazioni."
 
 msgid "Loading weather data…"
-msgstr "Wetterdaten werden geladen…"
+msgstr "Caricamento dati meteo…"
 
 # ConfigConnection.qml
 msgid "API Key:"
-msgstr "API-Schlüssel:"
+msgstr "Chiave API:"
 
 msgid "Enter Visual Crossing API key"
-msgstr "Visual Crossing API-Schlüssel eingeben"
+msgstr "Inserisci la chiave API Visual Crossing"
 
 msgid "Latitude:"
-msgstr "Breitengrad:"
+msgstr "Latitudine:"
 
 msgid "Longitude:"
-msgstr "Längengrad:"
+msgstr "Longitudine:"
 
 msgid "Find coordinates:"
-msgstr "Koordinaten ermitteln:"
+msgstr "Trova coordinate:"
 
 msgid "Language:"
-msgstr "Sprache:"
+msgstr "Lingua:"
 
 msgid "Units:"
-msgstr "Einheiten:"
+msgstr "Unità:"
 
 msgid "Metric (°C, km/h, hPa, km)"
-msgstr "Metrisch (°C, km/h, hPa, km)"
+msgstr "Metrico (°C, km/h, hPa, km)"
 
 msgid "Imperial (°F, mph, inHg, mi)"
-msgstr "Imperial (°F, mph, inHg, mi)"
+msgstr "Imperiale (°F, mph, inHg, mi)"
 
 msgid "Hybrid (°C, mph, hPa, km)"
-msgstr "Hybrid (°C, mph, hPa, km)"
+msgstr "Ibrido (°C, mph, hPa, km)"
 
 msgid "Display:"
-msgstr "Anzeige:"
+msgstr "Visualizzazione:"
 
 msgid "Show clock"
-msgstr "Uhrzeit anzeigen"
+msgstr "Mostra orologio"
 
 msgid "Update interval (minutes):"
-msgstr "Aktualisierung (Minuten):"
+msgstr "Intervallo di aggiornamento (minuti):"
 
 msgid "Free key at"
-msgstr "Kostenlosen Key erhalten bei"
-
-# config/config.qml
-msgid "General"
-msgstr "Allgemein"
-
-msgid "Appearance"
-msgstr "Darstellung"
+msgstr "Chiave gratuita su"
 
 # ConfigAppearance.qml
 msgid "Preview:"
-msgstr "Vorschau:"
+msgstr "Anteprima:"
 
 msgid "Background"
-msgstr "Hintergrund"
+msgstr "Sfondo"
 
 msgid "Color:"
-msgstr "Farbe:"
+msgstr "Colore:"
 
 msgid "Opacity:"
-msgstr "Deckkraft:"
+msgstr "Opacità:"
