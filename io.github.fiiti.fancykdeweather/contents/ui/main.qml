@@ -21,11 +21,15 @@ PlasmoidItem {
     readonly property bool   cfgShowClock:   plasmoid.configuration.showClock
 
     // ── Weather data state ───────────────────────────────────────────────
-    property var    weatherData:    null
-    property bool   loading:        false
-    property string errorMessage:   ""
-    property int    _retryCount:    0
-    property int    retryCountdown: 0   // seconds until next retry (shown in overlay)
+    property var    weatherData:      null
+    property bool   loading:          false
+    property string errorMessage:     ""
+    property int    _retryCount:      0
+    property int    retryCountdown:   0   // seconds until next retry (shown in overlay)
+
+    // ── City name — updated independently of weather data ────────────────
+    property string cityName:         ""
+    property int    _cityRetryCount:  0
 
     // ── Plasma representations ───────────────────────────────────────────
     preferredRepresentation: Plasmoid.formFactor === PlasmaCore.Types.Planar
@@ -67,10 +71,17 @@ PlasmoidItem {
         }
     }
 
+    // ── City retry timer — fires silently when Nominatim is slow/rate-limited ─
+    Timer {
+        id: cityRetryTimer
+        repeat: false
+        onTriggered: root.refreshCity()
+    }
+
     // Re-fetch when config changes (Qt.callLater deduplicates multiple simultaneous changes)
     onCfgApiKeyChanged:   { updateTimer.restart(); Qt.callLater(refresh) }
-    onCfgLatChanged:      Qt.callLater(refresh)
-    onCfgLonChanged:      Qt.callLater(refresh)
+    onCfgLatChanged:      { cityName = ""; _cityRetryCount = 0; Qt.callLater(refresh) }
+    onCfgLonChanged:      { cityName = ""; _cityRetryCount = 0; Qt.callLater(refresh) }
     onCfgUnitsChanged:    Qt.callLater(refresh)
     onCfgLangChanged:     Qt.callLater(refresh)
     onCfgIntervalChanged: updateTimer.restart()
@@ -111,12 +122,43 @@ PlasmoidItem {
                         _scheduleRetry(err)
                     }
                 } else {
-                    weatherData   = data
-                    errorMessage  = ""
-                    _retryCount   = 0
+                    weatherData  = data
+                    errorMessage = ""
+                    _retryCount  = 0
+                    // Trigger city lookup if we don't have a name yet
+                    if (cityName === "") {
+                        cityRetryTimer.stop()
+                        _cityRetryCount = 0
+                        refreshCity()
+                    }
                 }
             }
         )
+    }
+
+    // ── City name fetch (Nominatim, silent retries) ──────────────────────
+    // Schedule: 6 × 1 min, then 5 × 5 min, then every 1 h indefinitely
+    function refreshCity() {
+        WeatherData.fetchCity(
+            { latitude: cfgLat, longitude: cfgLon },
+            function(name) {
+                if (name && name.length > 0) {
+                    cityName = name
+                } else {
+                    _scheduleCityRetry()
+                }
+            }
+        )
+    }
+
+    function _scheduleCityRetry() {
+        var delays = [60, 60, 60, 60, 60, 60,   // 6 × 1 min
+                      300, 300, 300, 300, 300]    // 5 × 5 min
+        var secs = (_cityRetryCount < delays.length) ? delays[_cityRetryCount] : 3600
+        _cityRetryCount++
+        console.log("FancyKDEWeather: city lookup failed, retry in " + secs + " s (#" + _cityRetryCount + ")")
+        cityRetryTimer.interval = secs * 1000
+        cityRetryTimer.restart()
     }
 
     // ── Error code → localized message ──────────────────────────────────
@@ -166,7 +208,8 @@ PlasmoidItem {
     toolTipMainText: {
         if (!weatherData) return "Fancy KDE Weather"
         var c = weatherData.current
-        return (c.city ? c.city + " — " : "") +
+        var city = cityName || c.city || ""
+        return (city ? city + " — " : "") +
                (c.temperature !== null ? c.temperature + c.tempUnit : "—")
     }
     toolTipSubText: {

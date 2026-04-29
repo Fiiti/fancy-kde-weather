@@ -293,6 +293,38 @@ function fetchWeather(cfg, callback) {
     }
 }
 
+// ── Standalone city lookup (used for independent retry without re-fetching weather) ──
+
+function fetchCity(cfg, callback) {
+    var cacheKey = cfg.latitude + "," + cfg.longitude;
+    if (_cityCache.key === cacheKey && _cityCache.name) {
+        callback(_cityCache.name);
+        return;
+    }
+    if (_pendingCityRequest) { _pendingCityRequest.abort(); _pendingCityRequest = null; }
+    var cxhr = new XMLHttpRequest();
+    _pendingCityRequest = cxhr;
+    cxhr.onreadystatechange = function() {
+        if (cxhr.readyState !== XMLHttpRequest.DONE) return;
+        _pendingCityRequest = null;
+        if (cxhr.status === 200) {
+            try {
+                var addr = JSON.parse(cxhr.responseText).address || {};
+                var name = addr.city        || addr.town         || addr.village
+                         || addr.hamlet     || addr.suburb       || addr.city_district
+                         || addr.district   || addr.municipality || addr.county || "";
+                _cityCache = { key: cacheKey, name: name };
+                callback(name);
+                return;
+            } catch(e) {}
+        }
+        callback("");
+    };
+    cxhr.open("GET", "https://nominatim.openstreetmap.org/reverse?lat=" + cfg.latitude + "&lon=" + cfg.longitude + "&format=json");
+    cxhr.setRequestHeader("User-Agent", "FancyKDEWeather/1.0 (github.com/Fiiti/fancy-kde-weather)");
+    cxhr.send();
+}
+
 // ── Helper functions ─────────────────────────────────────────────────────────
 
 function _iconCode(vcIcon) {

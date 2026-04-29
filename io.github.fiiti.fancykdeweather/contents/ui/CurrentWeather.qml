@@ -51,7 +51,7 @@ Item {
             }
 
             Text {
-                text:           cur ? (cur.city || "") : ""
+                text:           root.cityName || (cur ? (cur.city || "") : "")
                 color:          "#BFD8F2"
                 font.pixelSize: Kirigami.Units.gridUnit * 0.78
                 font.bold:      true
