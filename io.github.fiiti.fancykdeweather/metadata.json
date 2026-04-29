@@ -13,7 +13,7 @@
         "Id": "io.github.fiiti.fancykdeweather",
         "License": "MIT",
         "Name": "Fancy KDE Weather",
-        "Version": "1.1.0",
+        "Version": "1.2.0",
         "Website": "https://github.com/Fiiti/fancy-kde-weather"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
