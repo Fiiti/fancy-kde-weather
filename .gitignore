@@ -1,4 +1,5 @@
 # Build artifacts
+*.plasmoid
 *.zip
 *.tar.gz
 
@@ -14,14 +15,3 @@ Thumbs.db
 # Claude Code (project-local AI assistant config — not relevant for contributors)
 .claude/
 CLAUDE.md
-Plan_temp.md
-
-# Development scratch notes
-dev/
-
-# Interne Projektdokumentation / persönliches Tagebuch (kein Public-Content)
-Plan_FKW_Store_Optimierung.md
-Plan_temp.md
-
-# Originales Rainmeter-Skin für Windows (nur lokal als Referenz)
-WeatherStationHD_API/
