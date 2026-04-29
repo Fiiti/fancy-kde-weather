@@ -142,3 +142,5 @@ msgstr "Nouvelle tentative dans %1 s…"
 # ConfigConnection.qml — update interval hint
 msgid "Tip: Updating every 60 minutes is sufficient — weather changes slowly."
 msgstr "Astuce : Une mise à jour toutes les 60 minutes est suffisante — la météo évolue lentement."
+
+

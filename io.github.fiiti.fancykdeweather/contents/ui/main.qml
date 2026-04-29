@@ -136,23 +136,19 @@ PlasmoidItem {
     }
 
     // ── Retry scheduler ──────────────────────────────────────────────────
+    // Phase 1 (no data yet):  5×2 s then 5×5 s
+    // Phase 2 (still no data): every 5 min until success
     function _scheduleRetry(err) {
         // Config errors require user action — no point retrying automatically
         if (err && err.code === "ERR_HTTP" && (err.status === 400 || err.status === 401))
             return
-        var delays = [2, 2, 2, 2, 2, 5, 5, 5, 5, 5]  // seconds: 5×2 s then 5×5 s
-        if (_retryCount < delays.length) {
-            var secs = delays[_retryCount]
-            _retryCount++
-            retryCountdown = secs
-            countdownTimer.restart()
-            retryTimer.interval = secs * 1000
-            retryTimer.restart()
-        } else {
-            // All retries exhausted — let updateTimer handle the next attempt
-            _retryCount   = 0
-            retryCountdown = 0
-        }
+        var delays = [2, 2, 2, 2, 2, 5, 5, 5, 5, 5]  // seconds
+        var secs = (_retryCount < delays.length) ? delays[_retryCount] : 5 * 60
+        _retryCount++
+        retryCountdown = secs
+        countdownTimer.restart()
+        retryTimer.interval = secs * 1000
+        retryTimer.restart()
     }
 
     // ── Icon path helpers (used by all child components via root.*) ───────

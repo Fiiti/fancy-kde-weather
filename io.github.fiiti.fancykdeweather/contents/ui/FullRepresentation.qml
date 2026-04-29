@@ -93,8 +93,12 @@ Item {
                         Layout.maximumWidth: fullRoot.width * 0.8
                         text: {
                             if (root.loading) return i18n("Loading weather data…")
-                            if (root.retryCountdown > 0)
-                                return root.errorMessage + "\n" + i18n("Retrying in %1 s…", root.retryCountdown)
+                            if (root.retryCountdown > 0) {
+                                var suffix = root.retryCountdown > 60
+                                    ? i18n("Retrying in %1 min…", Math.ceil(root.retryCountdown / 60))
+                                    : i18n("Retrying in %1 s…", root.retryCountdown)
+                                return root.errorMessage + "\n" + suffix
+                            }
                             return root.errorMessage
                         }
                         color:     root.loading ? "white" : "#FF6B6B"
