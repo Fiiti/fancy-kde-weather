@@ -112,3 +112,33 @@ msgstr "颜色："
 
 msgid "Opacity:"
 msgstr "不透明度："
+
+# main.qml — error messages
+msgid "Unable to reach weather service."
+msgstr "无法连接到天气服务。"
+
+msgid "Invalid request — check your coordinates."
+msgstr "请求无效，请检查坐标。"
+
+msgid "Invalid API key — please check your settings."
+msgstr "API 密钥无效，请检查设置。"
+
+msgid "API rate limit reached."
+msgstr "已达到 API 请求限制。"
+
+msgid "Weather service error (%1)."
+msgstr "天气服务错误（%1）。"
+
+msgid "Could not parse weather data."
+msgstr "无法解析天气数据。"
+
+msgid "Unknown error."
+msgstr "未知错误。"
+
+# FullRepresentation.qml — retry countdown
+msgid "Retrying in %1 s…"
+msgstr "%1 秒后重试…"
+
+# ConfigConnection.qml — update interval hint
+msgid "Tip: Updating every 60 minutes is sufficient — weather changes slowly."
+msgstr "提示：每 60 分钟更新一次即可，天气变化缓慢。"

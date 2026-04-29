@@ -155,4 +155,13 @@ Kirigami.FormLayout {
         implicitWidth:       Kirigami.Units.gridUnit * 7
         onValueModified:     connectionPage.cfg_updateInterval = value * 60
     }
+
+    Text {
+        Kirigami.FormData.label: ""
+        text: i18n("Tip: Updating every 60 minutes is sufficient — weather changes slowly.")
+        color: Kirigami.Theme.disabledTextColor
+        font.pixelSize: Kirigami.Units.gridUnit * 0.72
+        wrapMode: Text.WordWrap
+        Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+    }
 }

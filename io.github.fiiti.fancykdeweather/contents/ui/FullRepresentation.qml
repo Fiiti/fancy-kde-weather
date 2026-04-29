@@ -91,9 +91,12 @@ Item {
                     Text {
                         Layout.alignment:    Qt.AlignHCenter
                         Layout.maximumWidth: fullRoot.width * 0.8
-                        text:      root.loading
-                                   ? i18n("Loading weather data…")
-                                   : root.errorMessage
+                        text: {
+                            if (root.loading) return i18n("Loading weather data…")
+                            if (root.retryCountdown > 0)
+                                return root.errorMessage + "\n" + i18n("Retrying in %1 s…", root.retryCountdown)
+                            return root.errorMessage
+                        }
                         color:     root.loading ? "white" : "#FF6B6B"
                         wrapMode:  Text.WordWrap
                         horizontalAlignment: Text.AlignHCenter

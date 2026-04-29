@@ -201,7 +201,7 @@ function buildUrl(cfg) {
 
 function fetchWeather(cfg, callback) {
     if (!cfg.apiKey || cfg.apiKey.length === 0) {
-        callback(null, "Kein API-Schlüssel konfiguriert. Bitte in den Einstellungen eintragen.");
+        callback(null, { code: "ERR_NO_API_KEY" });
         return;
     }
 
@@ -231,14 +231,14 @@ function fetchWeather(cfg, callback) {
         if (thisId !== _requestId) { state.cancelled = true; return; }
 
         if (wxhr.status === 0) {
-            state.weatherErr  = "Netzwerkfehler – API nicht erreichbar";
+            state.weatherErr  = { code: "ERR_NETWORK" };
             state.weatherDone = true;
             _tryFinish();
             return;
         }
 
         if (wxhr.status !== 200) {
-            state.weatherErr  = "HTTP-Fehler " + wxhr.status + ": " + wxhr.statusText;
+            state.weatherErr  = { code: "ERR_HTTP", status: wxhr.status };
             state.weatherDone = true;
             _tryFinish();
             return;
@@ -247,7 +247,7 @@ function fetchWeather(cfg, callback) {
         try {
             state.weatherData = _parseResponse(JSON.parse(wxhr.responseText), cfg.units, cfg.language);
         } catch (e) {
-            state.weatherErr = "Fehler beim Verarbeiten der API-Antwort: " + e.message;
+            state.weatherErr = { code: "ERR_PARSE" };
         }
         state.weatherDone = true;
         _tryFinish();

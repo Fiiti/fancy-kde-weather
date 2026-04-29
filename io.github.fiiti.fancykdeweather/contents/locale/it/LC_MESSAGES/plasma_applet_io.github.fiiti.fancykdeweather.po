@@ -112,3 +112,33 @@ msgstr "Colore:"
 
 msgid "Opacity:"
 msgstr "Opacità:"
+
+# main.qml — error messages
+msgid "Unable to reach weather service."
+msgstr "Impossibile raggiungere il servizio meteo."
+
+msgid "Invalid request — check your coordinates."
+msgstr "Richiesta non valida — controlla le coordinate."
+
+msgid "Invalid API key — please check your settings."
+msgstr "Chiave API non valida — controlla le impostazioni."
+
+msgid "API rate limit reached."
+msgstr "Limite API raggiunto."
+
+msgid "Weather service error (%1)."
+msgstr "Errore del servizio meteo (%1)."
+
+msgid "Could not parse weather data."
+msgstr "Impossibile elaborare i dati meteo."
+
+msgid "Unknown error."
+msgstr "Errore sconosciuto."
+
+# FullRepresentation.qml — retry countdown
+msgid "Retrying in %1 s…"
+msgstr "Nuovo tentativo tra %1 s…"
+
+# ConfigConnection.qml — update interval hint
+msgid "Tip: Updating every 60 minutes is sufficient — weather changes slowly."
+msgstr "Suggerimento: Aggiornare ogni 60 minuti è sufficiente — il tempo cambia lentamente."
